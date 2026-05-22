@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج رَفْد التفاعلي المتكامل والمطور | Rafd AI Prototype</title>
+    
+    <!-- خطوط جوجل الرسمية بالهوية العربية الفخمة -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الأيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. التنسيقات والجماليات البصرية والهوية الزمردية الملكية الفخمة (CSS)
+           ========================================================================== */
+        :root {
+            --primary-dark: #022c22;
+            --primary-emerald: #064e3b;
+            --accent-green: #10b981;
+            --accent-gold: #c5a059;
+            --light-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --danger: #ef4444;
+            --danger-bg: rgba(239, 68, 68, 0.1);
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'IBM Plex Sans Arabic', sans-serif; 
+        }
+
+        body { 
+            background-color: var(--light-bg); 
+            color: var(--text-dark); 
+            padding: 20px; 
+            min-height: 100vh; 
+        }
+
+        /* ترويسة الصفحة الأساسية */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-emerald));
+            color: white; 
+            padding: 25px 40px; 
+            border-radius: 16px; 
+            margin-bottom: 30px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(2, 44, 34, 0.15);
+            border-bottom: 4px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: ''; 
+            position: absolute; 
+            top: -50%; 
+            right: -20%; 
+            width: 300px; 
+            height: 300px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+        }
+
+        header h1 { 
+            font-size: 32px; 
+            font-weight: 700; 
+            color: #ffffff; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+
+        header h1 span { 
+            color: var(--accent-green); 
+        }
+
+        header p { 
+            color: #a7f3d0; 
+            font-size: 16px; 
+            margin-top: 5px; 
+            font-weight: 300; 
+        }
+
+        .tag-version {
+            background: rgba(255, 255, 255, 0.08); 
+            padding: 8px 18px; 
+            border-radius: 30px;
+            font-size: 14px; 
+            font-weight: 500; 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+        }
+
+        /* شبكة محاكاة أجهزة الجوال */
+        .prototype-grid {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 30px; 
+            max-width: 1400px; 
+            margin: 0 auto; 
+            padding-bottom: 50px;
+        }
+
+        /* هياكل وتفاصيل الهواتف المطفية الفخمة */
+        .phone-frame {
+            background: #090d16; 
+            border: 14px solid #1e293b; 
+            border-radius: 48px;
+            height: 740px; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .phone-frame:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px -10px rgba(6, 78, 59, 0.15);
+        }
+
+        .phone-top {
+            height: 44px; 
+            background: #0f172a; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center; 
+            padding: 0 30px; 
+            color: #94a3b8; 
+            font-size: 13px; 
+            font-weight: 500;
+            position: relative;
+        }
+
+        .phone-top::after {
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 110px; 
+            height: 20px; 
+            background: #090d16; 
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px; 
+            z-index: 10;
+        }
+
+        .phone-body {
+            flex-grow: 1; 
+            background: #0f172a; 
+            color: white; 
+            padding: 20px;
+            display: flex; 
+            flex-direction: column; 
+            position: relative;
+            overflow-y: auto; 
+            scrollbar-width: none;
+        }
+
+        .phone-body::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .view-title {
+            text-align: center; 
+            color: var(--accent-green); 
+            font-size: 15px; 
+            font-weight: 600;
+            margin-bottom: 15px; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(255,255,255,0.08); 
+            padding-bottom: 12px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px;
+        }
+
+        /* تنسيقات شاشة نسك وقائمة دليل الحجاج (الجوال 1) */
+        .nesuk-brand { 
+            text-align: center; 
+            margin-bottom: 15px; 
+        }
+
+        .nesuk-brand i { 
+            font-size: 40px; 
+            color: var(--accent-green); 
+            margin-bottom: 8px; 
+        }
+
+        .form-label { 
+            display: block; 
+            font-size: 13px; 
+            color: #34d399; 
+            margin-bottom: 6px; 
+            font-weight: 500; 
+        }
+
+        .form-input {
+            width: 100%; 
+            padding: 10px 14px; 
+            border-radius: 8px; 
+            border: 1px solid #334155;
+            background: #1e293b; 
+            color: white; 
+            font-size: 14px; 
+            margin-bottom: 10px; 
+            outline: none;
+        }
+
+        .btn-connect {
+            width: 100%; 
+            background: var(--accent-green); 
+            color: white; 
+            border: none;
+            padding: 12px; 
+            border-radius: 8px; 
+            font-weight: 600; 
+            font-size: 15px;
+            cursor: pointer; 
+            transition: background 0.3s; 
+            display: flex; 
+            align-items: center;
+            justify-content: center; 
+            gap: 10px;
+        }
+
+        .btn-connect:hover { 
+            background: #059669; 
+        }
+
+        .pilgrims-directory {
+            display: none; 
+            flex-direction: column; 
+            gap: 10px; 
+            overflow-y: auto; 
+            max-height: 420px;
+            padding-bottom: 10px; 
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .pilgrim-item-card {
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px; 
+            padding: 12px; 
+            display: flex; 
+            justify-content: space-between;
+            align-items: center; 
+            transition: all 0.2s; 
+            cursor: pointer;
+        }
+
+        .pilgrim-item-card:hover, .pilgrim-item-card.selected {
+            background: rgba(16, 185, 129, 0.12);
+            border-color: var(--accent-green);
+        }
+
+        .pilgrim-info { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+        }
+
+        .pilgrim-name { 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: white; 
+        }
+
+        .pilgrim-meta { 
+            font-size: 11px; 
+            color: var(--text-muted); 
+        }
+
+        .pilgrim-badge {
+            font-size: 11px; 
+            padding: 4px 8px; 
+            border-radius: 12px; 
+            font-weight: 600;
+        }
+
+        .badge-online { 
+            background: rgba(16, 185, 129, 0.15); 
+            color: #34d399; 
+        }
+
+        .badge-away { 
+            background: rgba(239, 68, 68, 0.15); 
+            color: #f87171; 
+            animation: pulse 1.5s infinite; 
+        }
+
+        .btn-direct-chat {
+            background: rgba(197, 160, 89, 0.2); 
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold); 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer;
+            transition: all 0.2s; 
+            font-size: 13px; 
+            margin-right: 8px;
+        }
+
+        .btn-direct-chat:hover {
+            background: var(--accent-gold); 
+            color: #000;
+        }
+
+        /* شاشة محادثة المطوف الخاصة والمشفرة (الجوال 1 - Overlay) */
+        .private-chat-overlay {
+            display: none; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: #0f172a; 
+            z-index: 50; 
+            flex-direction: column; 
+            padding: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .chat-header {
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.08); 
+            padding-bottom: 12px; 
+            margin-bottom: 15px;
+        }
+
+        .chat-history {
+            flex-grow: 1; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px;
+            margin-bottom: 15px; 
+            padding-right: 5px; 
+            scrollbar-width: none;
+        }
+
+        .chat-bubble {
+            max-width: 80%; 
+            padding: 10px 14px; 
+            border-radius: 12px; 
+            font-size: 13px; 
+            line-height: 1.4;
+        }
+
+        .bubble-supervisor {
+            background: var(--primary-emerald); 
+            color: white; 
+            align-self: flex-start;
+            border-bottom-right-radius: 2px;
+            position: relative;
+        }
+
+        .bubble-pilgrim {
+            background: rgba(255, 255, 255, 0.08); 
+            color: #e2e8f0; 
+            align-self: flex-end;
+            border-bottom-left-radius: 2px;
+            position: relative;
+        }
+
+        .bubble-translation-note {
+            display: block; 
+            font-size: 10px; 
+            color: var(--accent-gold); 
+            margin-top: 4px;
+            border-top: 1px solid rgba(255,255,255,0.1); 
+            padding-top: 4px;
+        }
+
+        .chat-input-wrapper {
+            display: flex; 
+            gap: 10px; 
+            align-items: center;
+        }
+
+        .chat-input {
+            flex-grow: 1; 
+            padding: 10px 14px; 
+            background: #1e293b; 
+            border: 1px solid #334155;
+            border-radius: 8px; 
+            color: white; 
+            font-size: 13px; 
+            outline: none;
+        }
+
+        .chat-input:focus { 
+            border-color: var(--accent-green); 
+        }
+
+        /* رادار التقارب والبوصلة التفاعلية للحاج (الجوال 2) */
+        .radar-box {
+            width: 170px; 
+            height: 170px; 
+            border: 2px dashed rgba(16, 185, 129, 0.4);
+            border-radius: 50%; 
+            margin: 10px auto; 
+            position: relative;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 80%);
+        }
+
+        .radar-ring-mid {
+            width: 100px; 
+            height: 100px; 
+            border: 1px dashed rgba(16, 185, 129, 0.25);
+            border-radius: 50%; 
+            position: absolute;
+        }
+
+        .radar-center-dot {
+            width: 14px; 
+            height: 14px; 
+            background: #38bdf8; 
+            border-radius: 50%;
+            box-shadow: 0 0 15px #38bdf8; 
+            border: 2px solid #0f172a; 
+            z-index: 5;
+        }
+
+        .radar-pointer-dot {
+            width: 16px; 
+            height: 16px; 
+            background: var(--accent-green); 
+            border-radius: 50%;
+            position: absolute; 
+            top: 50px; 
+            right: 50px; 
+            box-shadow: 0 0 12px var(--accent-green);
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1); 
+            z-index: 4;
+            border: 2px solid #0f172a;
+        }
+
+        .radar-sweep-line {
+            width: 50%; 
+            height: 2px; 
+            background: linear-gradient(90deg, var(--accent-green), transparent);
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform-origin: left center;
+            animation: rotateRadar 5s linear infinite; 
+            pointer-events: none;
+        }
+
+        .voice-helper-badge {
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 8px 15px; 
+            border-radius: 30px;
+            font-size: 12px; 
+            margin-bottom: 10px; 
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .voice-visualizer {
+            display: none; 
+            align-items: center; 
+            gap: 3px; 
+            height: 15px;
+        }
+
+        .voice-bar {
+            width: 3px; 
+            height: 100%; 
+            background: var(--accent-green); 
+            border-radius: 3px;
+            animation: bounceVoice 0.8s ease-in-out infinite alternate;
+        }
+
+        .voice-bar:nth-child(2) { animation-delay: 0.15s; }
+        .voice-bar:nth-child(3) { animation-delay: 0.3s; }
+        .voice-bar:nth-child(4) { animation-delay: 0.45s; }
+
+        .instruction-card {
+            background: rgba(16, 185, 129, 0.1); 
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 12px; 
+            border-radius: 12px; 
+            text-align: center; 
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .translated-message-box {
+            display: none; 
+            background: rgba(197, 160, 89, 0.12); 
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            padding: 12px; 
+            border-radius: 12px; 
+            margin-top: 10px;
+            animation: slideUp 0.4s ease;
+        }
+
+        /* صندوق دردشة الحاج المستلمة والمترجمة (الجوال 2) */
+        .pilgrim-private-chat-area {
+            background: rgba(255, 255, 255, 0.04); 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px; 
+            padding: 12px; 
+            margin-top: 12px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px;
+            flex-grow: 1; 
+            max-height: 200px; 
+            overflow: hidden;
+        }
+
+        .pilgrim-chat-title { 
+            font-size: 11px; 
+            color: var(--accent-gold); 
+            font-weight: 600; 
+            display: flex; 
+            align-items: center; 
+            gap: 5px; 
+        }
+
+        .pilgrim-chat-history { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
+            overflow-y: auto; 
+            flex-grow: 1; 
+            scrollbar-width: none; 
+            padding-bottom: 5px; 
+        }
+
+        .pilgrim-chat-history::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .p-bubble { 
+            padding: 8px 12px; 
+            border-radius: 10px; 
+            font-size: 12px; 
+            line-height: 1.4; 
+            max-width: 90%; 
+        }
+
+        .p-bubble-received { 
+            background: rgba(16, 185, 129, 0.15); 
+            color: #fff; 
+            align-self: flex-start; 
+            border-bottom-left-radius: 2px; 
+            position: relative; 
+        }
+
+        .p-bubble-sent { 
+            background: rgba(255, 255, 255, 0.08); 
+            color: #cbd5e1; 
+            align-self: flex-end; 
+            border-bottom-right-radius: 2px; 
+        }
+
+        .pilgrim-chat-input-wrapper { 
+            display: flex; 
+            gap: 6px; 
+            align-items: center; 
+            border-top: 1px solid rgba(255,255,255,0.06); 
+            padding-top: 8px; 
+        }
+
+        .pilgrim-chat-input { 
+            flex-grow: 1; 
+            padding: 8px 12px; 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+            border-radius: 6px; 
+            color: white; 
+            font-size: 12px; 
+            outline: none; 
+        }
+
+        .pilgrim-chat-input:focus { 
+            border-color: var(--accent-green); 
+        }
+
+        .btn-pilgrim-send { 
+            background: var(--accent-green); 
+            border: none; 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 6px; 
+            color: white; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        .btn-emergency { 
+            background: var(--danger); 
+            color: white; 
+            border: none; 
+            padding: 12px; 
+            border-radius: 10px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            width: 100%; 
+            cursor: pointer; 
+            margin-top: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            box-shadow: 0 4px 12px rgba(239,68,68,0.25);
+        }
+
+        /* واجهة خريطة الشتات اللحظية ومقاييس المشرف (الجوال 3) */
+        .map-viewport {
+            flex-grow: 1; 
+            background: #e2e8f0; 
+            border-radius: 16px; 
+            position: relative;
+            overflow: hidden; 
+            background-image: radial-gradient(#cbd5e1 2px, transparent 2px);
+            background-size: 20px 20px; 
+            border: 2px solid #334155; 
+            min-height: 180px;
+        }
+
+        .map-supervisor-point {
+            width: 16px; 
+            height: 16px; 
+            background: #0284c7; 
+            border: 2px solid white;
+            border-radius: 50%; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%;
+            transform: translate(-50%, -50%); 
+            box-shadow: 0 0 10px rgba(2, 132, 199, 0.5);
+            z-index: 10;
+        }
+
+        .map-pilgrim-point {
+            width: 12px; 
+            height: 12px; 
+            background: var(--accent-green); 
+            border: 2px solid white;
+            border-radius: 50%; 
+            position: absolute; 
+            top: 48%; 
+            left: 46%;
+            box-shadow: 0 0 8px var(--accent-green); 
+            transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 9;
+        }
+
+        .map-active-pilgrim-card {
+            display: none; 
+            position: absolute; 
+            top: 10px; 
+            left: 10px; 
+            right: 10px;
+            background: rgba(15, 23, 42, 0.95); 
+            padding: 12px; 
+            border-radius: 12px;
+            border-right: 4px solid var(--danger); 
+            z-index: 25; 
+            font-size: 12px; 
+            color: white;
+            animation: slideUp 0.3s ease-out; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .map-card-info { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 3px; 
+        }
+
+        .map-card-actions { 
+            display: flex; 
+            gap: 8px; 
+            margin-top: 10px; 
+        }
+
+        .btn-card-action {
+            flex: 1; 
+            padding: 6px 10px; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: 600;
+            font-size: 11px; 
+            cursor: pointer; 
+            text-align: center;
+        }
+
+        .btn-card-nudge { 
+            background: var(--danger); 
+            color: white; 
+        }
+
+        .btn-card-chat { 
+            background: var(--accent-gold); 
+            color: black; 
+        }
+
+        .dashboard-metrics {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+            margin-bottom: 12px;
+        }
+
+        .metric-mini {
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 8px 12px; 
+            border-radius: 10px; 
+            text-align: center;
+        }
+
+        .metric-mini div:first-child { 
+            font-size: 11px; 
+            color: var(--text-muted); 
+        }
+
+        .metric-mini div:last-child { 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: white; 
+        }
+
+        .broadcast-panel {
+            background: rgba(15, 23, 42, 0.6); 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 15px; 
+            border-radius: 14px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px;
+        }
+
+        .broadcast-panel textarea {
+            width: 100%; 
+            height: 60px; 
+            background: #0f172a; 
+            border: 1px solid #334155;
+            border-radius: 8px; 
+            color: white; 
+            padding: 10px; 
+            font-size: 14px; 
+            outline: none;
+            resize: none;
+        }
+
+        .broadcast-panel textarea:focus { 
+            border-color: var(--accent-green); 
+        }
+
+        .btn-action-panel {
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 10px;
+        }
+
+        .btn-panel-action {
+            background: #1e293b; 
+            color: white; 
+            border: 1px solid #334155;
+            padding: 10px 15px; 
+            border-radius: 8px; 
+            font-size: 13px; 
+            font-weight: 500;
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-panel-action:hover { 
+            background: #334155; 
+            border-color: #475569; 
+        }
+
+        /* تراكبات حالات الطوارئ والإنذارات المظلمة */
+        .alert-overlay {
+            display: none; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            z-index: 100; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            text-align: center; 
+            padding: 25px; 
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .alert-overlay i { 
+            font-size: 55px; 
+            margin-bottom: 20px; 
+        }
+
+        .geofence-overlay { 
+            background: rgba(239, 68, 68, 0.95); 
+        }
+
+        .geofence-overlay i { 
+            color: white; 
+            animation: pulseRed 1.2s infinite; 
+        }
+
+        .override-overlay { 
+            background: rgba(15, 23, 42, 0.98); 
+            border: 4px solid var(--danger); 
+        }
+
+        .override-overlay i { 
+            color: var(--danger); 
+            animation: pulseRed 0.8s infinite; 
+        }
+
+        .sos-overlay { 
+            background: rgba(239, 68, 68, 0.96); 
+        }
+
+        .sos-overlay i { 
+            color: white; 
+            animation: pulseRed 1s infinite; 
+        }
+
+        .custom-toast {
+            display: none; 
+            position: fixed; 
+            bottom: 30px; 
+            left: 30px;
+            background: #1e293b; 
+            color: white; 
+            border-right: 5px solid var(--accent-green);
+            padding: 15px 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 1000; 
+            animation: slideInLeft 0.3s ease-out; 
+            align-items: center; 
+            gap: 12px;
+        }
+
+        /* حركات الأنيميشن التفاعلية */
+        @keyframes rotateRadar { 
+            from { transform: rotate(0deg); } 
+            to { transform: rotate(360deg); } 
+        }
+
+        @keyframes pulseRed { 
+            0% { transform: scale(1); opacity: 1; } 
+            50% { transform: scale(1.15); opacity: 0.6; } 
+            100% { transform: scale(1); opacity: 1; } 
+        }
+
+        @keyframes bounceVoice { 
+            from { height: 4px; } 
+            to { height: 100%; } 
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
+
+        @keyframes slideUp { 
+            from { transform: translateY(20px); opacity: 0; } 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+
+        @keyframes slideInLeft { 
+            from { transform: translateX(-100%); opacity: 0; } 
+            to { transform: translateX(0); opacity: 1; } 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الترويسة الرئيسية للمحاكي الميداني -->
+    <header>
+        <div>
+            <h1>رَفْد | <span>Rafd AI - Mutawwif Dashboard</span></h1>
+            <p>المحاكي الميداني المتكامل - تتبع المجموعات الذكي وإدارة التفويج</p>
+        </div>
+        <div class="tag-version">
+            <i class="fa-solid fa-code-merge" style="color: var(--accent-green);"></i>
+            الإصدار الميداني الشامل 2.2
+        </div>
+    </header>
+
+    <div class="prototype-grid">
+
+        <!-- =========================================================
+             الجوال الأول: بوابة نسك واستيراد بيانات المجموعات للحملة 
+             ========================================================= -->
+        <div class="phone-frame">
+            <div class="phone-top">
+                <span>10:00 ص</span>
+                <div style="display: flex; gap: 5px;"><i class="fa-solid fa-wifi"></i><i class="fa-solid fa-battery-three-quarters"></i></div>
+            </div>
+            <div class="phone-body" style="position: relative;">
+                <div class="view-title">
+                    <i class="fa-solid fa-passport"></i>
+                    بوابة المطوف والربط مع نُسُك
+                </div>
+                
+                <div class="nesuk-brand" id="nesuk-setup-header">
+                    <i class="fa-solid fa-kaaba"></i>
+                    <h4 style="font-size: 18px; color: white;">سحب قائمة الفوج آلياً</h4>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 5px;">استيراد فوري لجميع الحجاج المربوطين بالحملة</p>
+                </div>
+
+                <div class="card-panel" id="sync-form-panel">
+                    <div style="margin-bottom: 12px;">
+                        <label class="form-label">رقم ترخيص حملة المطوف</label>
+                        <input type="text" class="form-input" id="campaign-id" placeholder="مثال: 12-B950" value="12-B950">
+                    </div>
+                    <button class="btn-connect" onclick="importPilgrimsDirectory()">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                        استيراد قائمة الحجاج المربوطين
+                    </button>
+                </div>
+
+                <!-- قائمة دليل الحجاج التفاعلية بعد الاستيراد -->
+                <div class="pilgrims-directory" id="pilgrims-dir-list">
+                    <div style="font-size: 11px; color: var(--accent-gold); font-weight: 600; margin-bottom: 8px;">
+                        <i class="fa-solid fa-users"></i> قائمة حجاج حملتك المربوطين حالياً:
+                    </div>
+                </div>
+
+                <!-- نافذة التواصل الخاص في بوابة المطوف -->
+                <div class="private-chat-overlay" id="private-chat-window">
+                    <div class="chat-header">
+                        <span style="font-weight: 600; font-size: 14px; color: var(--accent-gold);" id="chat-title-name">تواصل خاص: محمد بن فيصل</span>
+                        <button onclick="closePrivateChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 16px;"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </div>
+                    <div class="chat-history" id="chat-conversation-box"></div>
+                    <div class="chat-input-wrapper">
+                        <input type="text" class="chat-input" id="chat-msg-input" placeholder="اكتب رسالة خاصة للحاج بالعربية...">
+                        <button class="btn-connect" onclick="sendPrivateChatMessage()" style="width: auto; padding: 10px 15px;"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             الجوال الثاني: شاشة هاتف الحاج وتوجيهات الرادار الصامتة 
+             ========================================================= -->
+        <div class="phone-frame">
+            <div class="phone-top">
+                <span>10:02 ص</span>
+                <div style="display: flex; gap: 5px;"><i class="fa-solid fa-location-arrow"></i><i class="fa-solid fa-battery-full"></i></div>
+            </div>
+            <div class="phone-body" id="pilgrim-view-body">
+                <div class="view-title" id="pilgrim-screen-title">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    حاج انٹرفیس - آسان رہنمائی
+                </div>
+
+                <div class="voice-helper-badge">
+                    <span id="active-pilgrim-profile-badge"><i class="fa-solid fa-user-circle" style="color: var(--accent-green); margin-left: 5px;"></i> محمد بن فيصل (باكستان)</span>
+                    <div class="voice-visualizer" id="audio-wave">
+                        <div class="voice-bar"></div>
+                        <div class="voice-bar"></div>
+                        <div class="voice-bar"></div>
+                        <div class="voice-bar"></div>
+                    </div>
+                </div>
+
+                <!-- بوصلة الرادار الدائرية البسيطة -->
+                <div class="radar-box">
+                    <div class="radar-sweep-line"></div>
+                    <div class="radar-ring-mid"></div>
+                    <div class="radar-center-dot"></div>
+                    <div class="radar-pointer-dot" id="radar-pointer"></div>
+                </div>
+
+                <div class="instruction-card" id="radar-instruction">
+                    <div style="font-size: 13px; color: #34d399; margin-bottom: 6px;" id="radar-lbl">
+                        کومپاس رہنما
+                    </div>
+                    <div style="font-size: 20px; font-weight: 600;" id="radar-dist-text">رہنما آپ سے 12 متر آگے ہے</div>
+                </div>
+
+                <!-- صندوق استقبال بث التعليمات الجماعية المترجمة -->
+                <div class="translated-message-box" id="message-recipient-box">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 11px; color: var(--accent-gold); font-weight: 600;" id="msg-source-type-tag">
+                            عام ہدایات
+                        </span>
+                        <span style="font-size: 10px; color: #94a3b8;" id="translation-lang-tag">اردو</span>
+                    </div>
+                    <div style="font-size: 14px; color: #ffffff; line-height: 1.5; font-style: italic;" id="translated-text-content">
+                        مشرف کا پیغام یہاں دکھائی دے گا...
+                    </div>
+                </div>
+
+                <!-- صندوق استلام وعرض الرسائل الخاصة المترجمة ثنائياً مع حقل رد للحاج -->
+                <div class="pilgrim-private-chat-area">
+                    <div class="pilgrim-chat-title" id="pilgrim-chat-sec-title">
+                        <i class="fa-solid fa-envelope-open-text"></i> نجی پیغامات کا باکس
+                    </div>
+                    <div class="pilgrim-chat-history" id="pilgrim-private-msg-list"></div>
+                    <div class="pilgrim-chat-input-wrapper">
+                        <input type="text" class="pilgrim-chat-input" id="pilgrim-chat-input-field" placeholder="اپنا جواب یہاں لکھیں...">
+                        <button class="btn-pilgrim-send" id="pilgrim-chat-send-btn" onclick="sendPilgrimReplyMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+
+                <button class="btn-emergency" id="emergency-btn-txt" onclick="sendSOSAlert()">
+                    فوری مدد (SOS)
+                </button>
+
+                <!-- تراكب السياج الجغرافي الصوتي المترجم للحاج -->
+                <div class="alert-overlay geofence-overlay" id="pilgrim-geofence-alert">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 10px;" id="geofence-alert-title">گروپ کی حد سے باہر!</h3>
+                    <p style="font-size: 16px; font-weight: 500; margin-bottom: 12px; color: #fee2e2;" id="voice-alert-text">
+                        "يا حاجي، آپ اپنے گروپ سے دور چلے گئے ہیں، براہ کرم پیچھے ہٹیں"
+                    </p>
+                    <p style="font-size: 13px; opacity: 0.8; margin-bottom: 25px;" id="geofence-alert-desc">رہنمائی خود بخود نشر ہو رہی ہے۔</p>
+                    <button class="btn-connect" id="geofence-btn-action" style="background: white; color: var(--danger); font-weight: 700;" onclick="pilgrimReturnToSect()">
+                        میں واپس آ رہا ہوں
+                    </button>
+                </div>
+
+                <!-- تراكب التنبيه القسري الإجباري المخترق للصامت -->
+                <div class="alert-overlay override-overlay" id="pilgrim-override-alert">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <h3 style="font-size: 24px; font-weight: 700; color: var(--danger); margin-bottom: 10px;" id="override-alert-title">ہنگامی سیکیورٹی الرٹ!</h3>
+                    <p style="font-size: 16px; margin-bottom: 20px; color: #e2e8f0; line-height: 1.5;" id="override-alert-text">
+                        سیکیورٹی وجوہات کی بناء پر، براہ کرم فوری طور پر رکیں اور اپنی جگہ پر قائم رہیں۔
+                    </p>
+                    <button class="btn-connect" id="override-btn-action" style="background: var(--danger); font-weight: 700;" onclick="dismissOverrideAlert()">
+                        تصدیق اور تعمیل
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================
+             الجوال الثالث: لوحة تحكم المطوف / المشرف الميداني الموحد 
+             ========================================================= -->
+        <div class="phone-frame">
+            <div class="phone-top">
+                <span>10:02 ص</span>
+                <div style="display: flex; gap: 5px;"><i class="fa-solid fa-sliders"></i><i class="fa-solid fa-battery-three-quarters"></i></div>
+            </div>
+            <div class="phone-body" style="position: relative;">
+                <div class="view-title">
+                    <i class="fa-solid fa-toolbox"></i>
+                    لوحة تحكم المشرف والسيطرة
+                </div>
+
+                <div class="dashboard-metrics">
+                    <div class="metric-mini">
+                        <div>حجاج الحملة المربوطين</div>
+                        <div id="metric-connected-count">4 حجاج</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div>الحالة الأمنية العامة</div>
+                        <div id="metric-security-status" style="color: var(--accent-green); font-weight: bold;">مستقرة</div>
+                    </div>
+                </div>
+
+                <!-- خريطة الشتات اللحظية وموقع الحجاج الميداني -->
+                <div class="map-viewport">
+                    <div class="map-supervisor-point"></div>
+                    <div class="map-pilgrim-point" style="top: 54%; left: 42%;"></div>
+                    <div class="map-pilgrim-point" style="top: 45%; left: 54%;"></div>
+                    <div class="map-pilgrim-point" style="top: 52%; left: 55%;"></div>
+                    <!-- نقطة الحاج محمد التفاعلية القابلة للحركة -->
+                    <div class="map-pilgrim-point" id="movable-pilgrim-point" style="top: 48%; left: 46%;"></div>
+
+                    <!-- بطاقة معلومات الحاج التفاعلية فوق خريطة المشرف -->
+                    <div class="map-active-pilgrim-card" id="map-pilgrim-card">
+                        <div class="map-card-info">
+                            <strong style="font-size: 13px;" id="map-card-p-name">الحاج: محمد بن فيصل</strong>
+                            <span id="map-card-p-meta" style="color: #cbd5e1;">البلد: باكستان | المسافة: 35 متر</span>
+                            <span id="map-card-p-status" style="color: var(--danger); font-weight: 500;"><i class="fa-solid fa-person-falling-burst"></i> حالة تشتت وابتعاد!</span>
+                        </div>
+                        <div class="map-card-actions">
+                            <button class="btn-card-action btn-card-nudge" onclick="nudgeActivePilgrimFromMap()"><i class="fa-solid fa-bell"></i> تنبيه فردي عاجل</button>
+                            <button class="btn-card-action btn-card-chat" onclick="openDirectChatFromMap()"><i class="fa-solid fa-comments"></i> تواصل خاص</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- لوحة بث التعليمات والترجمة اللحظية المتزامنة -->
+                <div class="broadcast-panel" style="margin-top: 15px;">
+                    <div style="font-size: 12px; color: var(--accent-gold); font-weight: 600;">بث التوجيه الفوري لجميع اللغات معاً</div>
+                    <textarea id="broadcast-input" placeholder="اكتب التنبيه بالعربية ليترجم فورياً لجميع الحجاج حسب لغة كل منهم..."></textarea>
+                    <button class="btn-connect" onclick="triggerMultilingualBroadcast()">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        بث وترجمة التعليمات للجميع
+                    </button>
+                </div>
+
+                <div class="btn-action-panel" style="margin-top: 15px;">
+                    <button class="btn-panel-action" id="geofence-sim-btn" onclick="triggerGeofenceSimulation()">
+                        <i class="fa-solid fa-person-walking-arrow-right" style="color: #f59e0b;"></i>
+                        محاكاة ابتعاد الحاج المحدد عن المجموعة (35م)
+                    </button>
+                    <button class="btn-panel-action" style="background: var(--danger-bg); border-color: rgba(239, 68, 68, 0.3); color: var(--danger); font-weight: bold;" onclick="sendOverrideAlert()">
+                        <i class="fa-solid fa-bullhorn"></i>
+                        إطلاق التنبيه الإجباري القسري للفوج
+                    </button>
+                </div>
+
+                <!-- تراكب استقبال استغاثة SOS من الحاج للمطوف وغرفة العمليات -->
+                <div class="alert-overlay sos-overlay" id="supervisor-sos-overlay">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">استغاثة طارئة SOS!</h3>
+                    <p style="font-size: 16px; color: #fee2e2; margin-bottom: 25px;" id="sos-message-details">
+                        الحاج يطلب مساعدة عاجلة! تم تحديد موقعه على الخريطة.
+                    </p>
+                    <div style="display: flex; gap: 10px; width: 100%;">
+                        <button class="btn-connect" style="background: #0284c7; flex: 1;" onclick="dismissSOSOverlay()">
+                            توجه للموقع الآن
+                        </button>
+                        <button class="btn-connect" style="background: rgba(255,255,255,0.15); flex: 1;" onclick="dismissSOSOverlay()">
+                            تجاهل
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- كرت الإشعارات التفاعلية الجانبية (Toast Notification) -->
+    <div class="custom-toast" id="system-toast">
+        <i class="fa-solid fa-bell" style="color: var(--accent-green); font-size: 18px;"></i>
+        <span id="toast-text" style="font-size: 14px; font-weight: 500;">تم الاتصال بنجاح</span>
+    </div>
+
+    <!-- =========================================================
+         2. كود منطق البرمجة والتفاعل اللحظي المشترك (JavaScript)
+         ========================================================= -->
+    <script>
+        // مصفوفة تعريب وتدويل واجهات هاتف الحاج بالكامل بلغاتهم الأم
+        const localizations = {
+            ur: {
+                viewTitle: "<i class='fa-solid fa-mobile-screen'></i> حاج انٹرفیس - آسان رہنمائی",
+                voiceHelperActive: "ذکی معاون آواز:",
+                compassTitle: "کومپاس رہنما",
+                sosBtn: "فوری مدد (SOS)",
+                chatInboxTitle: "<i class='fa-solid fa-envelope-open-text'></i> نجی پیغامات کا باکس",
+                geofenceTitle: "گروپ کی حد سے باہر!",
+                geofenceDesc: "رہنمائی خود بخود نشر ہو رہی ہے۔",
+                geofenceBtn: "میں واپس آ رہا ہوں",
+                overrideTitle: "ہنگامی سیکیورٹی الرٹ!",
+                overrideDesc: "سیکیورٹی وجوہات کی بناء پر، براہ کرم فوری طور پر رکیں اور اپنی جگہ پر قائم رہیں۔",
+                overrideBtn: "تصدیق اور تعمیل",
+                radarCompass: "<i class='fa-solid fa-compass'></i> کومپاس رہنما",
+                radarDist: (dist) => `رہنما آپ سے ${dist} میٹر آگے ہے`,
+                emergencyBtn: "فوری مدد (SOS)",
+                voiceHelper: "ذکی معاون آواز:",
+                chatFromSupervisor: "<i class='fa-solid fa-comments'></i> نجی پیغام",
+                broadcastHeader: "عام ہدایات",
+                chatNoMsgs: "ابھی تک کوئی پیغام نہیں ہے۔",
+                inputPlaceholder: "اپنا جواب یہاں لکھیں..."
+            },
+            id: {
+                viewTitle: "<i class='fa-solid fa-mobile-screen'></i> Jemaah - Panduan Sederhana",
+                voiceHelperActive: "Asisten Suara Aktif:",
+                compassTitle: "Kompas Panduan",
+                sosBtn: "Bantuan Darurat (SOS)",
+                chatInboxTitle: "<i class='fa-solid fa-envelope-open-text'></i> Kotak Pesan Pribadi",
+                geofenceTitle: "Peringatan Geofence!",
+                geofenceDesc: "Panduan suara otomatis disiarkan langsung di earphone Anda.",
+                geofenceBtn: "Saya Segera Kembali",
+                overrideTitle: "Peringatan Keamanan!",
+                overrideDesc: "Peringatan Paksa: Harap segera berhenti dan tetap di tempat demi keselamatan.",
+                overrideBtn: "Konfirmasi & Patuh",
+                radarCompass: "<i class='fa-solid fa-compass'></i> Kompas Panduan",
+                radarDist: (dist) => `Pembimbing ada di depan Anda ${dist} meter`,
+                emergencyBtn: "Kirim Bantuan Darurat (SOS)",
+                voiceHelper: "Asisten Suara Pintar:",
+                chatFromSupervisor: "<i class='fa-solid fa-comments'></i> Pesan Pribadi",
+                broadcastHeader: "Instruksi Umum",
+                chatNoMsgs: "Belum ada pesan.",
+                inputPlaceholder: "Tulis balasan Anda di sini..."
+            },
+            en: {
+                viewTitle: "<i class='fa-solid fa-mobile-screen'></i> Pilgrim - Simple Guide",
+                voiceHelperActive: "Smart Voice Assistant Active:",
+                compassTitle: "Guiding Compass",
+                sosBtn: "Emergency SOS",
+                chatInboxTitle: "<i class='fa-solid fa-envelope-open-text'></i> Private Inbox",
+                geofenceTitle: "Geofence Warning!",
+                geofenceDesc: "Automated voice guidance is streaming in your earphones.",
+                geofenceBtn: "Returning Immediately",
+                overrideTitle: "Security Emergency!",
+                overrideDesc: "Force Alert: Please stop immediately and stay in place for safety.",
+                overrideBtn: "Confirm & Comply",
+                radarCompass: "<i class='fa-solid fa-compass'></i> Guiding Compass",
+                radarDist: (dist) => `Supervisor is ${dist} meters in front of you`,
+                emergencyBtn: "Send Emergency SOS",
+                voiceHelper: "Smart Voice Assistant:",
+                chatFromSupervisor: "<i class='fa-solid fa-comments'></i> Private Message",
+                broadcastHeader: "General Instruction",
+                chatNoMsgs: "No messages yet.",
+                inputPlaceholder: "Type your reply here..."
+            },
+            tr: {
+                viewTitle: "<i class='fa-solid fa-mobile-screen'></i> Hacı - Kolay Kılavuz",
+                voiceHelperActive: "Akıllı Ses Asistanı Aktif:",
+                compassTitle: "Yönlendirici Pusula",
+                sosBtn: "Acil Yardım (SOS)",
+                chatInboxTitle: "<i class='fa-solid fa-Özel Mesaj Kutusu'></i> Özel Mesaj Kutusu",
+                geofenceTitle: "Sınır İhlal Uyarısı!",
+                geofenceDesc: "Sesli yönlendirme kulaklığınıza otomatik olarak iletiliyor.",
+                geofenceBtn: "Hemen Geri Dönüyorum",
+                overrideTitle: "Güvenlik Acil Çağrısı!",
+                overrideDesc: "Zorunlu Uyarı: Güvenlik nedeniyle lütfen hemen durun ve yerinizde kalın.",
+                overrideBtn: "Onayla ve Uy",
+                radarCompass: "<i class='fa-solid fa-compass'></i> Kılavuz Pusulası",
+                radarDist: (dist) => `Grup lideriniz ${dist} metre önünüzde`,
+                emergencyBtn: "Acil SOS Gönder",
+                voiceHelper: "Akıllı Sesli Asistan:",
+                chatFromSupervisor: "<i class='fa-solid fa-comments'></i> Özel Mesaj",
+                broadcastHeader: "Genel Talimat",
+                chatNoMsgs: "Henüz mesaj yok.",
+                inputPlaceholder: "Cevabınızı buraya yazın..."
+            }
+        };
+
+        // قاموس الترجمة اللحظية التفاعلية الثنائية للنموذج الأولي
+        const translationMatrix = {
+            // من العربي إلى اللغات الأخرى
+            fromArabic: {
+                "وينك": { ur: "آپ کہاں ہیں؟", id: "Di mana Anda?", en: "Where are you?", tr: "Neredesiniz?" },
+                "وينك؟": { ur: "آپ کہاں ہیں؟", id: "Di mana Anda?", en: "Where are you?", tr: "Neredesiniz?" },
+                "أين أنت": { ur: "آپ کہاں ہیں؟", id: "Di mana Anda?", en: "Where are you?", tr: "Neredesiniz?" },
+                "أين أنت؟": { ur: "آپ کہاں ہیں؟", id: "Di mana Anda?", en: "Where are you?", tr: "Neredesiniz?" },
+                "السلام عليكم": { ur: "السلام علیکم", id: "Assalamu'alaikum", en: "Peace be upon you", tr: "Selamün aleyküm" },
+                "السلام عليكم ورحمة الله": { ur: "السلام علیکم ورحمۃ اللہ", id: "Assalamu'alaikum warahmatullahi", en: "Peace and blessings of Allah be upon you", tr: "Selamün aleyküm ve rahmetullah" },
+                "انتظرني": { ur: "میرا انتظار کریں", id: "Tunggu saya", en: "Wait for me", tr: "Beni bekleyin" },
+                "انتظرني هنا": { ur: "یہاں میرا انتظار کریں", id: "Tunggu saya di sini", en: "Wait for me here", tr: "Beni burada bekleyin" },
+                "الحافلة ستتحرك": { ur: "بس اب چلنے والی ہے", id: "Bus akan segera berangkat", en: "The bus is about to leave", tr: "Otobüs kalkmak üzere" },
+                "تحرك الآن": { ur: "ابھی حرکت کریں", id: "Bergerak sekarang", en: "Move now", tr: "Şimdi hareket edin" },
+                "أنا قادم": { ur: "میں آ رہا ہوں", id: "Saya datang", en: "I am coming", tr: "Geliyorum" },
+                "أنا تائه": { ur: "میں کھو گیا ہوں", id: "Saya tersesat", en: "I am lost", tr: "Kayboldum" },
+                "حسنا": { ur: "ٹھیک ہے", id: "Baiklah", en: "Okay", tr: "Tamam" },
+                "حسناً": { ur: "ٹھیک ہے", id: "Baiklah", en: "Okay", tr: "Tamam" }
+            },
+            // الترجمة العكسية من لغة الحاج إلى العربي
+            toArabic: {
+                ur: {
+                    "میں آ رہا ہوں": "أنا قادم",
+                    "میں اب آ رہا ہوں": "أنا قادم الآن وفي طريقي إليكم",
+                    "میں کھو گیا ہوں": "أنا تائه وضعت عن المجموعة",
+                    "ٹھیک ہے": "حسناً، تم فهم التوجيه وسألتزم",
+                    "السلام علیکم": "السلام عليكم ورحمة الله"
+                },
+                id: {
+                    "Saya datang": "أنا قادم",
+                    "Saya datang sekarang": "أنا قادم الآن وفي طريقي إليكم",
+                    "Saya tersesat": "أنا تائه وضعت عن المجموعة",
+                    "Baiklah": "حسناً، تم فهم التوجيه وسألتزم",
+                    "Assalamu'alaikum": "السلام عليكم ورحمة الله"
+                },
+                en: {
+                    "I am coming": "أنا قادم",
+                    "I am coming now": "أنا قادم الآن وفي طريقي إليكم",
+                    "I am lost": "أنا تائه وضعت عن المجموعة",
+                    "Okay": "حسناً، تم فهم التوجيه وسألتزم",
+                    "Hello": "مرحباً يا مطوفنا العزيز"
+                },
+                tr: {
+                    "Geliyorum": "أنا قادم",
+                    "Şimdi geliyorum": "أنا قادم الآن وفي طريقي إليكم",
+                    "Kayboldum": "أنا تائه وضعت عن المجموعة",
+                    "Tamam": "حسناً، تم فهم التوجيه وسألتزم"
+                }
+            }
+        };
+
+        // قاعدة البيانات للحجاج المربوطين بالحملة من نسك مع سجل محادثات متبادل
+        const pilgrimsDataset = [
+            { id: 1, name: "محمد بن فيصل", country: "باكستان", lang: "ur", langLabel: "الأوردية (اردو)", warning: "اے حاجی، آپ اپنے گروپ سے دور چلے گئے ہیں، براہ کرم پیچھے ہٹیں", status: "online", translation: "براہ کرم سڑک کی بائیں جانب چلیں اور اب رکیں۔", originalDist: 12, chatHistory: [{ sender: 'pilgrim', text: "ٹھیک ہے", arabicTranslation: "حسناً، تم فهم التوجيه وسألتزم" }] },
+            { id: 2, name: "أحمد سوبارتو", country: "إندونيسيا", lang: "id", langLabel: "الإندونيسية (Bahasa)", warning: "Wahai jemaah, Anda telah menjauh dari rombongan, mohon kembali ke belakang", status: "online", translation: "Harap berjalan di sebelah kiri jalan dan berhenti sekarang.", originalDist: 8, chatHistory: [{ sender: 'pilgrim', text: "Baiklah", arabicTranslation: "حسناً، تم فهم التوجيه وسألتزم" }] },
+            { id: 3, name: "جون سميث", country: "بريطانيا", lang: "en", langLabel: "الإنجليزية (English)", warning: "Dear Pilgrim, you have moved away from your group, please return back", status: "online", translation: "Please walk on the left side of the road and stop now.", originalDist: 15, chatHistory: [{ sender: 'pilgrim', text: "Okay", arabicTranslation: "حسناً، تم فهم التوجيه وسألتزم" }] },
+            { id: 4, name: "أوكان يلماز", country: "تركيا", lang: "tr", langLabel: "التركية (Türkçe)", warning: "Hacı Bey, grubunuzdan uzaklaştınız, lütfen geri dönün", status: "online", translation: "Lütfen yolun sol tarafında yürüyün ve şimdi durun.", originalDist: 5, chatHistory: [{ sender: 'pilgrim', text: "Tamam", arabicTranslation: "حسناً، تم فهم التوجيه وسألتزم" }] }
+        ];
+
+        let activePilgrim = pilgrimsDataset[0]; // الحاج النشط المختار حالياً للتفاعل
+
+        /* ==========================================================================
+           3. منطق استيراد المجموعات وقائمة الحجاج وتحديث الواجهات
+           ========================================================================== */
+        function importPilgrimsDirectory() {
+            showToast("جاري مطابقة ترخيص الحملة وسحب قائمة الحجاج من نُسُك...");
+            
+            setTimeout(() => {
+                document.getElementById('sync-form-panel').style.display = 'none';
+                document.getElementById('nesuk-setup-header').style.display = 'none';
+                
+                const listContainer = document.getElementById('pilgrims-dir-list');
+                listContainer.style.display = 'flex';
+                
+                // توليد الحجاج برمجياً وعرضهم كقائمة
+                renderPilgrimsList();
+                // اختيار وتوطين أول حاج تلقائياً
+                selectPilgrim(activePilgrim.id);
+                
+                showToast("تم استيراد قائمة الحجاج وربط 4 حجاج بنجاح!");
+            }, 1200);
+        }
+
+        function renderPilgrimsList() {
+            const listContainer = document.getElementById('pilgrims-dir-list');
+            const titleHtml = `<div style="font-size: 11px; color: var(--accent-gold); font-weight: 600; margin-bottom: 8px;"><i class="fa-solid fa-users"></i> قائمة حجاج حملتك المربوطين حالياً:</div>`;
+            listContainer.innerHTML = titleHtml;
+
+            pilgrimsDataset.forEach(pilgrim => {
+                const isSelected = pilgrim.id === activePilgrim.id ? 'selected' : '';
+                const badgeClass = pilgrim.status === 'online' ? 'badge-online' : 'badge-away';
+                const badgeText = pilgrim.status === 'online' ? 'نشط' : 'متأخر';
+
+                const card = document.createElement('div');
+                card.className = `pilgrim-item-card ${isSelected}`;
+                
+                const infoWrapper = document.createElement('div');
+                infoWrapper.className = 'pilgrim-info';
+                infoWrapper.style.flexGrow = '1';
+                infoWrapper.onclick = () => selectPilgrim(pilgrim.id);
+                infoWrapper.innerHTML = `
+                    <span class="pilgrim-name">${pilgrim.name}</span>
+                    <span class="pilgrim-meta">${pilgrim.country} | ${pilgrim.langLabel}</span>
+                `;
+
+                const chatBtn = document.createElement('button');
+                chatBtn.className = 'btn-direct-chat';
+                chatBtn.title = `تواصل خاص مع ${pilgrim.name}`;
+                chatBtn.innerHTML = `<i class="fa-solid fa-comments"></i>`;
+                chatBtn.onclick = (e) => {
+                    e.stopPropagation(); // منع الانتقال لاختيار الحاج كنشط كلياً عند نقر الشات فقط
+                    openPrivateChat(pilgrim.id);
+                };
+
+                const badge = document.createElement('span');
+                badge.className = `pilgrim-badge ${badgeClass}`;
+                badge.innerText = badgeText;
+
+                card.appendChild(infoWrapper);
+                card.appendChild(chatBtn);
+                card.appendChild(badge);
+
+                listContainer.appendChild(card);
+            });
+
+            document.getElementById('metric-connected-count').innerText = `${pilgrimsDataset.length} حجاج`;
+        }
+
+        function selectPilgrim(id) {
+            activePilgrim = pilgrimsDataset.find(p => p.id === id);
+            
+            // إعادة رسم القائمة لتحديث المحدد
+            renderPilgrimsList();
+
+            // جلب حزم التعريب المناسبة للحاج المختار
+            const localization = localizations[activePilgrim.lang];
+
+            // 1. ترجمة عنوان واجهة الحاج بالكامل
+            document.getElementById('pilgrim-screen-title').innerHTML = localization.viewTitle;
+
+            // 2. ترجمة ترويسة الحاج ومساعد الصوت
+            document.getElementById('active-pilgrim-profile-badge').innerHTML = `<i class="fa-solid fa-user-circle" style="color: var(--accent-green); margin-left: 5px;"></i> ${activePilgrim.name} (${activePilgrim.country})`;
+
+            // 3. ترجمة نصوص البوصلة والرادار بالكامل
+            document.getElementById('radar-lbl').innerHTML = localization.radarCompass;
+            document.getElementById('radar-dist-text').innerHTML = localization.radarDist(activePilgrim.originalDist);
+            document.getElementById('radar-dist-text').style.color = 'white';
+            
+            // 4. ترجمة أزرار التحكم والـ SOS بالكامل
+            document.getElementById('emergency-btn-txt').innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${localization.emergencyBtn}`;
+
+            // 5. ترجمة صندوق الرسائل الخاصة للحاج بالكامل والمدخلات
+            document.getElementById('pilgrim-chat-sec-title').innerHTML = localization.chatInboxTitle;
+            document.getElementById('pilgrim-chat-input-field').placeholder = localization.inputPlaceholder;
+            renderPilgrimPrivateInbox();
+
+            // 6. ترجمة كامل نصوص تنبيه السياج الجغرافي وتوطينها للغته الأم
+            document.getElementById('geofence-alert-title').innerText = localization.geofenceTitle;
+            document.getElementById('voice-alert-text').innerText = `"${activePilgrim.warning}"`;
+            document.getElementById('geofence-alert-desc').innerText = localization.geofenceDesc;
+            document.getElementById('geofence-btn-action').innerText = localization.geofenceBtn;
+
+            // 7. ترجمة كامل نصوص النداء الأمني الإجباري وتوطينها للغته الأم
+            document.getElementById('override-alert-title').innerText = localization.overrideTitle;
+            document.getElementById('override-alert-text').innerText = localization.overrideDesc;
+            document.getElementById('override-btn-action').innerText = localization.overrideBtn;
+
+            // إرجاع نقطة الرادار لمكانها الأصلي المناسب للحاج
+            const radarPointer = document.getElementById('radar-pointer');
+            const pos = 50 + (activePilgrim.originalDist * 2);
+            radarPointer.style.top = `${pos}px`;
+            radarPointer.style.right = `${pos}px`;
+
+            // إخفاء تنبيه الترجمة السابقة في حال الانتقال لحاج آخر
+            document.getElementById('message-recipient-box').style.display = 'none';
+
+            // إخفاء بطاقة تفاصيل الحاج على الخريطة إلا إذا كان متباعداً
+            if (activePilgrim.status === 'away') {
+                showActivePilgrimMapCard();
+            } else {
+                document.getElementById('map-pilgrim-card').style.display = 'none';
+            }
+
+            // تحديث شاشة المحادثة المفتوحة للمطوف إذا كانت مفتوحة لنفس الحاج
+            if (document.getElementById('private-chat-window').style.display === 'flex') {
+                document.getElementById('chat-title-name').innerText = `تواصل خاص: ${activePilgrim.name}`;
+                renderChatHistory();
+            }
+
+            showToast(`تم الانتقال لهاتف الحاج: ${activePilgrim.name} (توطين اللغة تلقائياً)`);
+        }
+
+        /* ==========================================================================
+           4. محرك محادثة التواصل الخاصة والمشفرة وتوطين اللغات تلقائياً
+           ========================================================================== */
+        function renderPilgrimPrivateInbox() {
+            const inboxContainer = document.getElementById('pilgrim-private-msg-list');
+            inboxContainer.innerHTML = '';
+
+            const localization = localizations[activePilgrim.lang];
+
+            if (activePilgrim.chatHistory.length === 0) {
+                inboxContainer.innerHTML = `<div style="font-size: 11px; color: var(--text-muted); text-align: center;">${localization.chatNoMsgs}</div>`;
+                return;
+            }
+
+            activePilgrim.chatHistory.forEach(msg => {
+                const bubble = document.createElement('div');
+                let displayText = msg.text;
+                
+                if (msg.sender === 'supervisor') {
+                    displayText = msg.translatedText || msg.text;
+                }
+
+                bubble.className = msg.sender === 'supervisor' ? 'p-bubble p-bubble-received' : 'p-bubble p-bubble-sent';
+                bubble.innerText = displayText;
+                inboxContainer.appendChild(bubble);
+            });
+            inboxContainer.scrollTop = inboxContainer.scrollHeight;
+        }
+
+        function openPrivateChat(id) {
+            const pilgrim = pilgrimsDataset.find(p => p.id === id);
+            activePilgrim = pilgrim;
+            renderPilgrimsList();
+            
+            document.getElementById('chat-title-name').innerText = `تواصل خاص: ${pilgrim.name}`;
+            document.getElementById('private-chat-window').style.display = 'flex';
+            
+            renderChatHistory();
+        }
+
+        function closePrivateChat() {
+            document.getElementById('private-chat-window').style.display = 'none';
+        }
+
+        function renderChatHistory() {
+            const chatBox = document.getElementById('chat-conversation-box');
+            chatBox.innerHTML = '';
+            
+            activePilgrim.chatHistory.forEach(msg => {
+                const bubble = document.createElement('div');
+                bubble.className = msg.sender === 'supervisor' ? 'chat-bubble bubble-supervisor' : 'chat-bubble bubble-pilgrim';
+                
+                if (msg.sender === 'pilgrim') {
+                    bubble.innerHTML = `
+                        ${msg.arabicTranslation || msg.text}
+                        <span class="bubble-translation-note">
+                            <i class="fa-solid fa-language"></i> ترجمة آليّة من: ${activePilgrim.langLabel}<br>
+                            <small style="opacity: 0.7;">النص الأصلي: ${msg.text}</small>
+                        </span>
+                    `;
+                } else {
+                    bubble.innerHTML = `
+                        ${msg.text}
+                        <span class="bubble-translation-note" style="color: #a7f3d0;">
+                            <i class="fa-solid fa-circle-check"></i> ترجمت وأرسلت بـ: ${activePilgrim.langLabel}<br>
+                            <small style="opacity: 0.7;">ترجمة الحاج: ${msg.translatedText}</small>
+                        </span>
+                    `;
+                }
+                
+                chatBox.appendChild(bubble);
+            });
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendPrivateChatMessage() {
+            const msgInput = document.getElementById('chat-msg-input');
+            const rawText = msgInput.value.trim();
+            if (!rawText) return;
+
+            const cleanText = rawText.replace(/[؟?.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").trim();
+
+            let translatedTextResult = "";
+            const selectedLang = activePilgrim.lang;
+
+            if (translationMatrix.fromArabic[cleanText] && translationMatrix.fromArabic[cleanText][selectedLang]) {
+                translatedTextResult = translationMatrix.fromArabic[cleanText][selectedLang];
+            } else if (translationMatrix.fromArabic[rawText] && translationMatrix.fromArabic[rawText][selectedLang]) {
+                translatedTextResult = translationMatrix.fromArabic[rawText][selectedLang];
+            } else {
+                if (selectedLang === 'ur') {
+                    translatedTextResult = "[ترجمہ] " + rawText;
+                } else if (selectedLang === 'id') {
+                    translatedTextResult = "[Terjemahan] " + rawText;
+                } else if (selectedLang === 'en') {
+                    translatedTextResult = "[Translated] " + rawText;
+                } else if (selectedLang === 'tr') {
+                    translatedTextResult = "[Tercüme] " + rawText;
+                }
+            }
+
+            activePilgrim.chatHistory.push({ 
+                sender: 'supervisor', 
+                text: rawText,
+                translatedText: translatedTextResult 
+            });
+            msgInput.value = '';
+            
+            renderChatHistory();
+            renderPilgrimPrivateInbox();
+
+            document.getElementById('audio-wave').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('audio-wave').style.display = 'none';
+            }, 3000);
+
+            showToast(`تمت الترجمة والإرسال لـ ${activePilgrim.name} بلغة ${activePilgrim.langLabel}`);
+        }
+
+        function sendPilgrimReplyMessage() {
+            const pilgrimInput = document.getElementById('pilgrim-chat-input-field');
+            const originalText = pilgrimInput.value.trim();
+            if (!originalText) return;
+
+            let arabicTranslationResult = "";
+            const pilgrimLang = activePilgrim.lang;
+
+            if (translationMatrix.toArabic[pilgrimLang] && translationMatrix.toArabic[pilgrimLang][originalText]) {
+                arabicTranslationResult = translationMatrix.toArabic[pilgrimLang][originalText];
+            } else {
+                arabicTranslationResult = "مترجم من " + activePilgrim.langLabel + ": " + originalText;
+            }
+
+            activePilgrim.chatHistory.push({
+                sender: 'pilgrim',
+                text: originalText,
+                arabicTranslation: arabicTranslationResult
+            });
+
+            pilgrimInput.value = '';
+            renderPilgrimPrivateInbox();
+
+            if (document.getElementById('private-chat-window').style.display === 'flex') {
+                renderChatHistory();
+            }
+
+            showToast(`تم استلام رد الحاج وترجمته آلياً للمطوف: "${arabicTranslationResult}"`);
+        }
+
+        function openDirectChatFromMap() {
+            openPrivateChat(activePilgrim.id);
+            showToast("تم فتح محادثة التواصل الخاصة بالحاج المحدد.");
+        }
+
+        /* ==========================================================================
+           5. محاكاة تتبع المواقع وسياج الأمان الجغرافي (Geofencing Simulator)
+           ========================================================================== */
+        function triggerGeofenceSimulation() {
+            activePilgrim.status = 'away';
+            renderPilgrimsList();
+
+            const pilgrimDot = document.getElementById('movable-pilgrim-point');
+            pilgrimDot.style.top = '15%';
+            pilgrimDot.style.left = '20%';
+            pilgrimDot.style.background = 'var(--danger)';
+            pilgrimDot.style.boxShadow = '0 0 12px var(--danger)';
+
+            const radarPointer = document.getElementById('radar-pointer');
+            radarPointer.style.top = '15px';
+            radarPointer.style.right = '20px';
+
+            const distanceText = document.getElementById('radar-dist-text');
+            if (activePilgrim.lang === 'ur') {
+                distanceText.innerText = "مشرف آپ سے 35 میٹر پیچھے ہے!";
+            } else if (activePilgrim.lang === 'id') {
+                distanceText.innerText = "Pembimbing ada 35 meter di belakang Anda!";
+            } else if (activePilgrim.lang === 'en') {
+                distanceText.innerText = "Supervisor is 35 meters behind you!";
+            } else if (activePilgrim.lang === 'tr') {
+                distanceText.innerText = "Grup lideri 35 metre arkanızda!";
+            }
+            distanceText.style.color = 'var(--danger)';
+
+            document.getElementById('metric-security-status').innerText = "تنبيه ابتعاد!";
+            document.getElementById('metric-security-status').style.color = 'var(--danger)';
+
+            showActivePilgrimMapCard();
+
+            setTimeout(() => {
+                document.getElementById('pilgrim-geofence-alert').style.display = 'flex';
+                document.getElementById('audio-wave').style.display = 'flex';
+            }, 800);
+
+            showToast(`تنبيه: سياج الأمان رصد خروج الحاج (${activePilgrim.name}) عن السرب!`);
+        }
+
+        function showActivePilgrimMapCard() {
+            const card = document.getElementById('map-pilgrim-card');
+            document.getElementById('map-card-p-name').innerText = `الحاج: ${activePilgrim.name}`;
+            document.getElementById('map-card-p-meta').innerText = `البلد: ${activePilgrim.country} | المسافة المتأخرة: 35 متر`;
+            card.style.display = 'block';
+        }
+
+        function nudgeActivePilgrimFromMap() {
+            document.getElementById('pilgrim-override-alert').style.display = 'flex';
+            showToast(`تم إطلاق إشعار وتنبيه فردي مستهدف للحاج (${activePilgrim.name}) بلغتة الأم.`);
+        }
+
+        function pilgrimReturnToSect() {
+            document.getElementById('pilgrim-geofence-alert').style.display = 'none';
+            document.getElementById('audio-wave').style.display = 'none';
+
+            showToast("جاري التراجع والعودة للمسار الجماعي...");
+
+            const localization = localizations[activePilgrim.lang];
+
+            setTimeout(() => {
+                activePilgrim.status = 'online';
+                renderPilgrimsList();
+
+                const pilgrimDot = document.getElementById('movable-pilgrim-point');
+                pilgrimDot.style.top = '48%';
+                pilgrimDot.style.left = '46%';
+                pilgrimDot.style.background = 'var(--accent-green)';
+                pilgrimDot.style.boxShadow = '0 0 8px var(--accent-green)';
+
+                const radarPointer = document.getElementById('radar-pointer');
+                const pos = 50 + (activePilgrim.originalDist * 2);
+                radarPointer.style.top = `${pos}px`;
+                radarPointer.style.right = `${pos}px`;
+
+                const distanceText = document.getElementById('radar-dist-text');
+                distanceText.innerHTML = localization.radarDist(activePilgrim.originalDist);
+                distanceText.style.color = 'white';
+
+                document.getElementById('metric-security-status').innerText = "مستقرة";
+                document.getElementById('metric-security-status').style.color = 'var(--accent-green)';
+
+                document.getElementById('map-pilgrim-card').style.display = 'none';
+
+                showToast("عادت المجموعة للتماسك والاستقرار الجغرافي.");
+            }, 1000);
+        }
+
+        /* ==========================================================================
+           5. نداءات الطوارئ والبث الإجباري وعمليات الاستغاثة SOS
+           ========================================================================== */
+        function triggerMultilingualBroadcast() {
+            const broadcastText = document.getElementById('broadcast-input').value.trim();
+            if (!broadcastText) {
+                showToast("الرجاء كتابة رسالة توجيهية أولاً للترجمة والتعليمات.");
+                return;
+            }
+
+            const recipientBox = document.getElementById('message-recipient-box');
+            const translationTag = document.getElementById('translation-lang-tag');
+            const textContent = document.getElementById('translated-text-content');
+            const localization = localizations[activePilgrim.lang];
+
+            document.getElementById('msg-source-type-tag').innerHTML = `<i class="fa-solid fa-language"></i> ${localization.broadcastHeader}`;
+            translationTag.innerText = activePilgrim.langLabel;
+            textContent.innerText = `"${activePilgrim.translation}"`;
+            recipientBox.style.display = 'block';
+
+            const audioWave = document.getElementById('audio-wave');
+            audioWave.style.display = 'flex';
+
+            showToast(`تم بث وترجمة التوجيه لجميع أفراد الفوج بلغاتهم (الرسالة مترجمة للحاج الحالي بلغة ${activePilgrim.langLabel}).`);
+
+            setTimeout(() => {
+                audioWave.style.display = 'none';
+            }, 4000);
+        }
+
+        function sendOverrideAlert() {
+            document.getElementById('pilgrim-override-alert').style.display = 'flex';
+            showToast("تم إرسال نداء الاختراق القسري لجميع هواتف الفوج.");
+        }
+
+        function dismissOverrideAlert() {
+            document.getElementById('pilgrim-override-alert').style.display = 'none';
+            showToast(`تم تأكيد استلام التوجيه الطارئ من قبل الحاج (${activePilgrim.name}).`);
+        }
+
+        function sendSOSAlert() {
+            document.getElementById('supervisor-sos-overlay').style.display = 'flex';
+            document.getElementById('sos-message-details').innerText = `الحاج (${activePilgrim.name}) يطلب مساعدة عاجلة! تم تحديد موقعه على الخريطة.`;
+            
+            const pilgrimDot = document.getElementById('movable-pilgrim-point');
+            pilgrimDot.style.background = '#f59e0b';
+            pilgrimDot.style.boxShadow = '0 0 20px #f59e0b';
+
+            showToast(`تم إرسال نداء SOS للمطوف وغرفة العمليات من (${activePilgrim.name}).`);
+        }
+
+        function dismissSOSOverlay() {
+            document.getElementById('supervisor-sos-overlay').style.display = 'none';
+            
+            const pilgrimDot = document.getElementById('movable-pilgrim-point');
+            pilgrimDot.style.background = 'var(--accent-green)';
+            pilgrimDot.style.boxShadow = '0 0 8px var(--accent-green)';
+            
+            showToast("تم استقبال الطلب وتوجيه أقرب وحدة دعم ميدانية.");
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('system-toast');
+            const toastText = document.getElementById('toast-text');
+            toastText.innerText = message;
+            toast.style.display = 'flex';
+
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
